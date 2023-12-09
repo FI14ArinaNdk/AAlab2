@@ -20,9 +20,9 @@ class CustomBase64EncoderDecoder:
             with open(output_file, 'w') as file:
                 file.write(base64_data)
 
-            print(f"Файл '{input_file}' успішно закодовано та збережено як '{output_file}'.")
+            print(f"File '{input_file}' successfully encoded and saved as '{output_file}'.")
         except Exception as e:
-            print(f"Помилка кодування файлу '{input_file}': {e}")
+            print(f"File encoding error '{input_file}': {e}")
 
     @staticmethod
     def decode_file(input_file, output_file=None):
@@ -41,9 +41,9 @@ class CustomBase64EncoderDecoder:
             with open(output_file, 'wb') as file:
                 file.write(decoded_data)
 
-            print(f"Файл '{input_file}' успішно розкодовано та збережено як '{output_file}'.")
+            print(f"File '{input_file}' successfully encoded and saved as '{output_file}'.")
         except Exception as e:
-            print(f"Помилка розкодування файлу '{input_file}': {e}")
+            print(f"File encoding error  '{input_file}': {e}")
 
     @staticmethod
     def encode(binary_data):
@@ -99,7 +99,7 @@ class CustomBase64EncoderDecoder:
 
             for char in line:
                 if char not in CustomBase64EncoderDecoder.ALPHABET:
-                    print("Помилка у частині: Ігноруємо рядок з некоректними символами.")
+                    print("Error in the part: We ignore the line with incorrect characters.")
                     continue
                 binary_data += format(CustomBase64EncoderDecoder.ALPHABET.index(char), '06b')
 
@@ -124,11 +124,11 @@ class CustomBase64EncoderDecoder:
             chunk += CustomBase64EncoderDecoder.PADDING_CHAR
 
         if len(chunk) % 4 != 0:
-            print(f"Помилка у частині: Неправильна кількість символів ({len(chunk)}).")
+            print(f"Part Error: Invalid number of characters ({len(chunk)}).")
             return bytearray()
 
         if any(char not in CustomBase64EncoderDecoder.ALPHABET for char in chunk):
-            print("Помилка у частині: Ігноруємо рядок з некоректними символами.")
+            print("Error in the part: We ignore the line with incorrect characters.")
             return bytearray()
 
         binary_data = ''.join(format(CustomBase64EncoderDecoder.ALPHABET.index(char), '06b') for char in chunk)
@@ -142,7 +142,7 @@ class CustomBase64EncoderDecoder:
 
 def main():
     if len(sys.argv) < 3:
-        print("Використання: python base64.py encode input_file [output_file]")
+        print("Using: python base64.py encode input_file [output_file]")
         print("            python base64.py decode input_file [output_file]")
         sys.exit(1)
 
@@ -157,7 +157,7 @@ def main():
     elif operation == 'decode':
         encoder_decoder.decode_file(input_file, output_file)
     else:
-        print("Невідома операція. Використайте 'encode' або 'decode'.")
+        print("Unknown operation. Use it 'encode' або 'decode'.")
 
 if __name__ == "__main__":
     main()
